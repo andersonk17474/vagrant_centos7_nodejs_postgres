@@ -1,0 +1,8 @@
+#!/bin/bash
+#http://www.liquidweb.com/kb/how-to-install-and-connect-to-postgresql-on-centos-7/
+yum localinstall http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-1.noarch.rpm
+yum -y update
+yum -y install postgresql94 postgresql94-server postgresql94-contrib postgresql94-libs --disablerepo=* --
+systemctl enable postgresql-9.3
+/usr/pgsql-9.3/bin/postgresql93-setup initdb
+systemctl start postgresql-9.3
