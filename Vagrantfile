@@ -119,7 +119,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # inline shell scripts
   config.vm.provision "shell", path: "install_os_tools_centos7.sh"
   config.vm.provision "shell", path: "install_nginx_centos7.sh"
-  config.vm.provision "shell", path: "install_postgres93_centos7.sh"  
+  config.vm.provision "shell", path: "install_postgres94_centos7.sh"  
 
 end
 
