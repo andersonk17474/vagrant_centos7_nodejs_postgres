@@ -11,5 +11,3 @@ yum group install -y "Development Tools"
 yum install -y net-tools
 
 
-# update the system
-yum -y update

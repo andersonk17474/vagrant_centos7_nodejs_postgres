@@ -39,6 +39,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
+  config.vm.synced_folder "./www", "/home/vagrant/www/html/", create:true
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -54,6 +55,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   # View the documentation for the provider you're using for more
   # information on available options.
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 2048
+    v.cpus = 2
+  end
+
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
@@ -118,9 +124,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # inline shell scripts
   config.vm.provision "shell", path: "install_os_tools_centos7.sh"
+  config.vm.provision "shell", path: "update_os_centos7.sh"
   config.vm.provision "shell", path: "install_nginx_centos7.sh"
   config.vm.provision "shell", path: "install_postgres94_centos7.sh"
-  config.vm.provision "shell", path: "install_nodejs_centos7.sh"    
+  # important to run the node install as non-root user so node commands dont require sudo
+  config.vm.provision "shell", path: "install_nodejs_centos7.sh", privileged:false  
+  # update the bash profile for vagrant user, do not run as root to maintain proper file permissions
+  config.vm.provision "shell", path: "update_bash_profile_centos7.sh", privileged:false  
 
 end
 
