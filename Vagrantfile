@@ -127,6 +127,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "shell", path: "update_os_centos7.sh"
   config.vm.provision "shell", path: "install_nginx_centos7.sh"
   config.vm.provision "shell", path: "install_postgres94_centos7.sh"
+  config.vm.provision "shell", path: "install_mongodb_centos7.sh"
   # important to run the node install as non-root user so node commands dont require sudo
   config.vm.provision "shell", path: "install_nodejs_centos7.sh", privileged:false  
   # update the bash profile for vagrant user, do not run as root to maintain proper file permissions
